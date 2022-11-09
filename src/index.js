@@ -8,44 +8,72 @@ const COLORS = {
 };
 
 const form = document.querySelector(".form"),
+    toggle = document.querySelector("#toggle"),
     selectElement = document.querySelector("#select"),
     selectInput = selectElement.parentNode.querySelector("input"),
-    allOptions = document.querySelectorAll(".form__option"),
+    allOptions = document.querySelector("#options").querySelectorAll("span"),
     textInputs = document.querySelectorAll(".form__input");
 
 const formObject = new Form(form);
 //endregion
 
 //region Event Handlers
-// Open selects
-selectElement.addEventListener("click", (e) => {
-    const selectOptions = document.querySelector("#options");
-    let display = selectOptions.style.display;
+// Toggle event
+(function () {
+    let isOn = toggle.parentNode.querySelector("label").innerText === "On" ? true : false;
 
-    if (display === "none") {
+    toggle.addEventListener("change", (e) => {
+        isOn = !isOn;
+        toggle.parentNode.querySelector("label").innerText = isOn ? "On" : "Off";
+    })
+})();
+
+// Select
+(function () {
+    const selectOptions = document.querySelector("#options");
+
+    //region Utility
+    const setOptionsVisible = () => {
         selectOptions.style.display = "flex";
         selectElement.style.border = "2px solid #7A5CFA"
         selectElement.style.borderBottomLeftRadius = "0";
         selectElement.style.borderBottomRightRadius = "0";
-    } else {
+    }
+
+    const setOptionsInvisible = () => {
         selectOptions.style.display = "none";
         selectElement.style.border = "1px solid #CCCCCC"
         selectElement.style.borderBottomLeftRadius = "8px";
         selectElement.style.borderBottomRightRadius = "8px";
     }
-});
+    //endregion
 
-// Select an option
-allOptions.forEach((element) => {
-    element.addEventListener("click", (e) => {
-        selectElement.innerHTML = element.innerHTML;
-        selectInput.value = element.innerHTML;
-        allOptions.forEach((option) => {
-            option.classList.remove("selected");
+    // Open selects
+    selectElement.addEventListener("click", (e) => {
+        let display = selectOptions.style.display;
+
+        if (display === "none") {
+            setOptionsVisible();
+        } else {
+            setOptionsInvisible();
+        }
+    });
+
+    // Select an option
+    allOptions.forEach((element) => {
+        element.addEventListener("click", (e) => {
+            selectElement.innerHTML = element.innerHTML;
+            selectInput.value = element.innerHTML;
+
+            allOptions.forEach((option) => {
+                option.classList.remove("selected");
+            })
+            element.classList.add("selected");
+
+            setOptionsInvisible();
         })
-        element.classList.add("selected");
     })
-})
+})();
 
 // Display errors in text inputs if needed
 textInputs.forEach((input) => {
@@ -54,7 +82,6 @@ textInputs.forEach((input) => {
 
     if (errorNode) {
         const defaultMessage = errorNode.innerHTML;
-
 
         //region Utility
         /**

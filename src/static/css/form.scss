@@ -15,201 +15,227 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(122, 92, 250, 0.2)
-}
+  background-color: rgba(122, 92, 250, 0.2);
 
-form {
-  background-color: white;
-  min-width: 40%;
-  padding: 100px;
-}
-
-label {
-  font-size: 12px;
-  display: block;
-}
-
-.form__inputContext {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  color: $gray;
-}
-
-.form__error {
-  color: $red;
-}
-
-input[type=text],
-input[type=password]{
-  outline: none;
-  padding: 16px;
-  margin-top: 8px;
-  width: 100%;
-  border: 1px solid $lightGray;
-  border-radius: 8px;
-  background-color: transparent;
-}
-
-.form__selectTrigger {
-  font-size: 16px;
-  width: 100%;
-  border: 1px solid $lightGray;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.form__option {
-  padding: 16px;
-  border: 1px solid $lightGray;
-  width: 100%;
-}
-
-.form__selectOptions {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  margin: 0;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
-.selected {
-  background-color: $blue;
-}
-
-input.form__errorInput {
-  border: 2px solid $red;
-}
-
-.form__select {
-  outline: none;
-  appearance: none;
-
-  &:after {
-    content: "";
-    width: 0.8em;
-    height: 0.5em;
-    background-color: $blue;
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-
-  }
-}
-
-input[type=checkbox].form__checkbox {
-  -webkit-appearance: none;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border: 1px solid $lightGray;
-  border-radius: 8px;
-  position: relative;
-  vertical-align: middle;
-  transform: translateY(-10%);
-
-  &:checked:after {
+  form {
+    background-color: white;
+    min-width: 40%;
+    padding: 100px;
     font-size: 16px;
-    position: absolute;
-    content: '\2714';
-    color: $blue;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-55%);
+    font-weight: 400;
+
+    .form__select {
+      outline: none;
+      appearance: none;
+
+      &:after {
+        content: "";
+        width: 0.8em;
+        height: 0.5em;
+        background-color: $blue;
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+
+      }
+
+      #select{
+        font-size: 16px;
+        width: 100%;
+        border: 1px solid $lightGray;
+        padding: 16px;
+        border-radius: 8px;
+      }
+
+      #options{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin: 0;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+
+        span {
+          font-size: 16px;
+          font-weight: 400;
+          padding: 16px;
+          border: 1px solid $lightGray;
+          width: 100%;
+          border-right: 2px solid $blue;
+          border-left: 2px solid $blue;
+
+          &:last-of-type{
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-bottom: 2px solid $blue;
+          }
+        }
+      }
+
+      .selected {
+        background-color: $blue;
+      }
+    }
+
+    .form__buttons {
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+
+      button {
+        padding: 16px;
+        border-radius: 8px;
+        width: 170px;
+        outline: none;
+        font-size: 16px;
+        font-weight: 400;
+        color: $blue;
+        cursor: pointer;
+        background-color: transparent;
+        border: 1px solid $blue;
+      }
+
+      button[type=submit]{
+        background-color: $blue;
+        color: white;
+        border: none;
+      }
+    }
+
+    .form__inputContainer {
+      display: block;
+      margin-bottom: 32px;
+
+      label {
+        font-size: 12px;
+        display: block;
+        color: $gray;
+      }
+
+      label[for="text"],
+      label[for="pwd"],
+      label[for="username"]{
+        font-weight: 600;
+      }
+
+      label[for="toggle"]{
+        display: inline;
+      }
+
+      input[type=password],
+      input[type=text]{
+        font-weight: 400;
+        font-size: 16px;
+        outline: none;
+        padding: 16px;
+        margin-top: 8px;
+        width: 100%;
+        border: 1px solid $lightGray;
+        border-radius: 8px;
+        background-color: transparent;
+      }
+
+      .form__errorInput {
+        border: 2px solid $red;
+      }
+
+      span {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        color: $gray;
+      }
+
+      .form__checkbox {
+        -webkit-appearance: none;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border: 1px solid $lightGray;
+        border-radius: 8px;
+        position: relative;
+        vertical-align: middle;
+        transform: translateY(-10%);
+
+        &:checked:after {
+          font-size: 16px;
+          position: absolute;
+          content: '\2714';
+          color: $blue;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-55%);
+        }
+      }
+
+      .form__toggle {
+        -webkit-appearance: none;
+        background: white;
+        border: 1px solid $lightGray;
+        border-radius: 32px;
+        width: 49px;
+        height: 24px;
+        position: relative;
+        vertical-align: middle;
+        transform: translateY(-10%);
+
+        &:after {
+          position: absolute;
+          left: 25px;
+          top: 2px;
+          content: "";
+          width: 16px;
+          height: 16px;
+          background: white;
+          border: 1px solid $lightGray;
+          border-radius: 50%;
+        }
+
+        &:checked:after {
+          position: absolute;
+          left: 3px;
+          top: 3px;
+          content: "";
+          width: 16px;
+          height: 16px;
+          background: white;
+          border-radius: 50%;
+        }
+
+        &:checked {
+          background: $blue;
+          outline: none;
+          border: none;
+        }
+      }
+
+      input[type=radio] {
+        -webkit-appearance: none;
+        width: 24px;
+        height: 24px;
+        background: white;
+        border: 1px solid $lightGray;
+        border-radius: 50%;
+        position: relative;
+        vertical-align: middle;
+        transform: translateY(-10%);
+
+        &:checked:after {
+          position: absolute;
+          display: inline-block;
+          content: "";
+          width: 12px;
+          height: 12px;
+          background: $blue;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+      }
+    }
+
   }
 }
 
-input[type=radio] {
-  -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
-  background: white;
-  border: 1px solid $lightGray;
-  border-radius: 50%;
-  position: relative;
-  vertical-align: middle;
-  transform: translateY(-10%);
 
-  &:checked:after {
-    position: absolute;
-    display: inline-block;
-    content: "";
-    width: 12px;
-    height: 12px;
-    background: $blue;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-}
 
-input[type=checkbox].form__toggle {
-  -webkit-appearance: none;
-  background: #FFFFFF;
-  border: 1px solid $lightGray;
-  border-radius: 32px;
-  width: 49px;
-  height: 24px;
-  position: relative;
-  vertical-align: middle;
-  transform: translateY(-10%);
-
-  &:after {
-    position: absolute;
-    left: 25px;
-    top: 2px;
-    content: "";
-    width: 16px;
-    height: 16px;
-    background: white;
-    border: 1px solid $lightGray;
-    border-radius: 50%;
-  }
-
-  &:checked:after {
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    content: "";
-    width: 16px;
-    height: 16px;
-    background: white;
-    border-radius: 50%;
-  }
-
-  &:checked {
-    background: $blue;
-    outline: none;
-    border: none;
-  }
-}
-
-.form__buttons {
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-
-  button {
-    padding: 16px;
-    border-radius: 8px;
-    width: 170px;
-    outline: none;
-    font-size: 16px;
-    cursor: pointer;
-  }
-}
-
-.form__nextButton {
-  background-color: $blue;
-}
-
-.form__cancelButton {
-  background-color: transparent;
-  border: 1px solid $blue;
-}
-
-.form__inputContainer {
-  display: block;
-  margin-bottom: 32px;
-}
 
