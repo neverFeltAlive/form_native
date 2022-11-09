@@ -73,12 +73,14 @@ export default class Form {
                 if (hasValidator) {
                     currentInput.validator = this.validators[element.name];
                     currentInput.error = currentInput.validator(currentInput.value);
+                }
 
-                    // Add event listner
-                    element.addEventListener("change", (e) => {
-                        // Update value
-                        currentInput.value = e.target.value;
+                // Add event listner
+                element.addEventListener("change", (e) => {
+                    // Update value
+                    currentInput.value = e.target.value;
 
+                    if (hasValidator){
                         // Use validator and set error message is needed
                         const error = currentInput.validator(currentInput.value);
                         if (error) {
@@ -86,8 +88,8 @@ export default class Form {
                         } else {
                             currentInput.error = null;
                         }
-                    })
-                }
+                    }
+                })
             }
         }
         //endregion
@@ -107,5 +109,18 @@ export default class Form {
 
         // Change object field and return the result
         return this.isValid = isFormValid;
+    }
+
+    /**
+     * Returns an object of values ( {[inputName]:[inputValue] }
+     */
+    getValues() {
+        let values = {};
+        for (let input in this.inputs) {
+            let inputObject = this.inputs[input];
+            values[input] = inputObject.value;
+        }
+
+        return values;
     }
 }
